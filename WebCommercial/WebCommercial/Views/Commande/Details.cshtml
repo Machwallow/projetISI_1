@@ -1,0 +1,30 @@
+﻿
+@model WebCommercial.Models.Metier.Commande
+
+@{
+    ViewBag.Title = "Détails";
+    Layout = Layout = "~/Views/Shared/_LayoutCommercial.cshtml";
+}
+
+<h2>Détails d'une commande</h2>
+
+@if(Model != null)
+{
+    <div>
+        <p>
+            <strong>Commande N°@Model.NoComm</strong>
+        </p>
+    </div>
+    <div>
+        <p>
+            <strong>Passée le :</strong> @Model.DateComm
+        </p>
+    </div>
+    <div>
+        <p>
+            <strong>Montant total</strong>
+        </p>
+    </div>
+}
+
+

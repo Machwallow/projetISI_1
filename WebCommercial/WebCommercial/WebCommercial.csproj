@@ -147,16 +147,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\CommandeController.cs" />
     <Compile Include="Controllers\ConnexionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dao\ArticleDao.cs" />
     <Compile Include="Models\Dao\ClientDao.cs" />
     <Compile Include="Models\Dao\CommandeDao.cs" />
     <Compile Include="Models\Dao\VendeurDao.cs" />
     <Compile Include="Models\MesExceptions\MonException.cs" />
     <Compile Include="Models\MesExceptions\Serreurs.cs" />
+    <Compile Include="Models\Metier\Article.cs" />
     <Compile Include="Models\Metier\Clientel.cs" />
     <Compile Include="Models\Dao\UtilisateurDao.cs" />
     <Compile Include="Models\Metier\Commande.cs" />
@@ -209,10 +212,11 @@
     <Content Include="Views\Shared\navigation.cshtml" />
     <Content Include="Views\Home\Connexion.cshtml" />
     <Content Include="Views\Home\Deconnexion.cshtml" />
+    <Content Include="Views\Commande\Index.cshtml" />
+    <Content Include="Views\Commande\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Commande\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

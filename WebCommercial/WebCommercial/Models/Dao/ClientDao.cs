@@ -20,7 +20,7 @@ namespace WebCommercial.Models.Dao
             /// <returns>Liste de numéros de clients</returns>
             List<String> mesNumeros = new List<String>();
             DataTable dt;
-            Serreurs er = new Serreurs("Erreur sur lecture du client.", "Clientel.LectureNoClient()");
+            Serreurs er = new Serreurs("Erreur sur lecture du client.", "Client.LectureNoClient()");
             try
             {
 

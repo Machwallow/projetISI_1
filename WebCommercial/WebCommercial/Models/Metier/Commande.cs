@@ -11,15 +11,17 @@ namespace WebCommercial.Models.Metier
         private int noVendeur;
         private int noClient;
         private String dateComm;
-        private char fact;
+        private String fact;
+        private int nbArticles = 0;
 
         public int NoComm { get => noComm; set => noComm = value; }
         public int NoVendeur { get => noVendeur; set => noVendeur = value; }
         public int NoClient { get => noClient; set => noClient = value; }
         public string DateComm { get => dateComm; set => dateComm = value; }
-        public char Fact { get => fact; set => fact = value; }
+        public String Fact { get => fact; set => fact = value; }
+        public int NbArticles { get => nbArticles; set => nbArticles = value; }
 
-        public Commande(int noComm, int noVendeur, int noClient, string dateComm, char fact)
+        public Commande(int noComm, int noVendeur, int noClient, string dateComm, String fact)
         {
             this.NoComm = noComm;
             this.NoVendeur = noVendeur;
