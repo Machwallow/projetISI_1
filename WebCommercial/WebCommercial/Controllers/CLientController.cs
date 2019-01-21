@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebCommercial.Models.Metier;
 using WebCommercial.Models.MesExceptions;
+using WebCommercial.Models.Dao;
 
 namespace WebApplication1.Controllers
 {
@@ -17,7 +18,7 @@ namespace WebApplication1.Controllers
 
             try
             {
-                clients = Clientel.getClients();
+                clients = ClientDao.getClients();
             }
             catch (MonException e)
             {
@@ -33,7 +34,7 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                Clientel unCl = Clientel.getClient(id);
+                Clientel unCl = ClientDao.getClient(id);
                 return View(unCl);
             }
             catch (MonException e)
@@ -51,7 +52,7 @@ namespace WebApplication1.Controllers
                 // utilisation possible de Request
                //  String s= Request["Societe"];
 
-                Clientel.updateClient(unC);
+                ClientDao.updateClient(unC);
                 return View();
             }
             catch (MonException e)

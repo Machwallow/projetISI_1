@@ -27,15 +27,18 @@ namespace WebCommercial.Controllers
             return View();
         }
 
-        public ActionResult Accueil(string id = "Christian")
+        public ActionResult Connexion()
         {
-            if (string.IsNullOrWhiteSpace(id))
-                return View("Error");
-            else
-            {
-                ViewData["Nom"] = id;
-                return View();
-            }
+            ViewBag.Message = "Your connection page";
+
+            return View();
+        }
+
+        public ActionResult Deconnexion()
+        {
+            ViewBag.Message = "Your deconnection page";
+
+            return View();
         }
     }
 }

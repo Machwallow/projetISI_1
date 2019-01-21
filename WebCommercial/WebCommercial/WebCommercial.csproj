@@ -146,16 +146,25 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\CLientController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\ConnexionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dao\ClientDao.cs" />
+    <Compile Include="Models\Dao\CommandeDao.cs" />
+    <Compile Include="Models\Dao\VendeurDao.cs" />
     <Compile Include="Models\MesExceptions\MonException.cs" />
     <Compile Include="Models\MesExceptions\Serreurs.cs" />
     <Compile Include="Models\Metier\Clientel.cs" />
+    <Compile Include="Models\Dao\UtilisateurDao.cs" />
+    <Compile Include="Models\Metier\Commande.cs" />
+    <Compile Include="Models\Metier\Utilisateur.cs" />
+    <Compile Include="Models\Metier\Vendeur.cs" />
     <Compile Include="Models\Persistance\Connexion.cs" />
     <Compile Include="Models\Persistance\DBInterface.cs" />
+    <Compile Include="Models\Utilitaires\FonctionsUtiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -191,16 +200,19 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutCommercial.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\Client\Modifier.cshtml" />
+    <Content Include="Views\Shared\navigation.cshtml" />
+    <Content Include="Views\Home\Connexion.cshtml" />
+    <Content Include="Views\Home\Deconnexion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Commande\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

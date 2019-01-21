@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Deconnexion";
+    Layout = Layout = "~/Views/Shared/_LayoutCommercial.cshtml";
+    Session.RemoveAll();
+}
+
+<h2>Déconnexion</h2>
+<div>
+    <p>
+        Vous avez été correctement déconnecté.
+    </p>
+    <div class="col-md-2 col-sm-2">
+        @Html.ActionLink("Retourner à l'accueil", "", "", null, new { @class = "btn btn-default btn-primary" })
+    </div>
+</div>
