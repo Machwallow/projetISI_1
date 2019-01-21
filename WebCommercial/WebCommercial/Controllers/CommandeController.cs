@@ -28,5 +28,21 @@ namespace WebCommercial.Controllers
 
             return View(commandes);
         }
+
+        public ActionResult Details(String nuComm)
+        {
+            Commande comm = null;
+            int tempNuComm = Int16.Parse(nuComm);
+            try
+            {
+                comm = CommandeDao.getCommande(tempNuComm);
+                comm.ListArticles = ArticleDao.getArticlesByNoComm(tempNuComm);
+                return View(comm);
+            }
+            catch (MonException e)
+            {
+                return HttpNotFound();
+            }
+        }
     }
 }

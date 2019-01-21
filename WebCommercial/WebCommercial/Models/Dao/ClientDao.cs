@@ -62,7 +62,7 @@ namespace WebCommercial.Models.Dao
                 {
                     Clientel client = new Clientel();
                     DataRow dataRow = dt.Rows[0];
-                    client.NoClient = numCli;
+                    client.NuClient = numCli;
                     client.NomCl = dataRow[1].ToString();
                     client.Societe = dataRow[0].ToString();
                     client.PrenomCl = dataRow[2].ToString();
@@ -102,7 +102,7 @@ namespace WebCommercial.Models.Dao
                 foreach (DataRow dataRow in dt.Rows)
                 {
                     client = new Clientel();
-                    client.NoClient = dataRow[6].ToString();
+                    client.NuClient = dataRow[6].ToString();
                     client.NomCl = dataRow[1].ToString();
                     client.Societe = dataRow[0].ToString();
                     client.PrenomCl = dataRow[2].ToString();
@@ -139,7 +139,7 @@ namespace WebCommercial.Models.Dao
                                   ", ADRESSE_CL = '" + unCli.AdresseCl + "'" +
                                    ", VILLE_CL = '" + unCli.VilleCl + "'" +
                                    ", CODE_POST_CL = '" + unCli.CodePostCl + "'" +
-                                   " WHERE NO_CLIENT LIKE '" + unCli.NoClient + "'";
+                                   " WHERE NO_CLIENT LIKE '" + unCli.NuClient + "'";
             try
             {
                 DBInterface.Insertion_Donnees(requete);

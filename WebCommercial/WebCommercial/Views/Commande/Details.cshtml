@@ -4,15 +4,17 @@
 @{
     ViewBag.Title = "Détails";
     Layout = Layout = "~/Views/Shared/_LayoutCommercial.cshtml";
+
 }
 
-<h2>Détails d'une commande</h2>
+<h2>Détails de la commande N°@Model.NuComm</h2>
 
-@if(Model != null)
+@if (Model != null)
 {
+<div class="container">
     <div>
         <p>
-            <strong>Commande N°@Model.NoComm</strong>
+            <strong>Commande N°@Model.NuComm</strong>
         </p>
     </div>
     <div>
@@ -22,9 +24,38 @@
     </div>
     <div>
         <p>
-            <strong>Montant total</strong>
+            <strong>Montant total :</strong> @Model.TotalCost €
         </p>
     </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">N° article</th>
+                <th scope="col">Libellé</th>
+                <th scope="col">Prix unitaire (€)</th>
+                <th scope="col">Quantité commandée</th>
+                <th scope="col">Montant total (€)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var article in Model.ListArticles)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => article.NuArticle)</td>
+                    <td>@Html.DisplayFor(modelItem => article.LibArticle)</td>
+                    <td>@Html.DisplayFor(modelItem => article.PrixArticle)</td>
+                    <td>@Html.DisplayFor(modelItem => article.QteComm)</td>
+                    <td>@Html.DisplayFor(modelItem => article.TotalCost)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="form-group">
+        <div>
+            @Html.ActionLink("Fermer", "Index", "Commande", new { @class = "btn btn-default btn-outline-secondary" })
+        </div>
+    </div>
+</div>
 }
 
 

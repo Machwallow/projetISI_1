@@ -29,20 +29,20 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@Html.DisplayFor(modelItem => item.NoComm)</td>
-                        <td>@Html.DisplayFor(modelItem => item.NoVendeur)</td>
-                        <td>@Html.DisplayFor(modelItem => item.NoClient) </td>
+                        <td>@Html.DisplayFor(modelItem => item.NuComm)</td>
+                        <td>@Html.DisplayFor(modelItem => item.NuVendeur)</td>
+                        <td>@Html.DisplayFor(modelItem => item.NuClient) </td>
                         <td>@Html.DisplayFor(modelItem => item.DateComm)</td>
                         <td>@Html.DisplayFor(modelItem => item.NbArticles) </td>
                         <td>@Html.DisplayFor(modelItem => item.Fact)</td>
                         <td style="text-align:center;">
                             <span>
-                                @Html.ActionLink("Details", "Details", "Commande", new { id = item.NoComm }, new { @class = "btn btn-default btn-primary" })
+                                @Html.ActionLink("Details", "Details", "Commande", new { nuComm = item.NuComm }, new { @class = "btn btn-default btn-primary" })
                             </span>
                         </td>
                         <td style="text-align:center;">
                             <span>
-                                @Html.ActionLink("  ", "Modifier", "Commande", new { id = item.NoComm }, new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-pencil" })
+                                @Html.ActionLink("  ", "Modifier", "Commande", new { nuComm = item.NuComm }, new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-pencil" })
                             </span>
                         </td>
                     </tr>

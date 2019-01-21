@@ -214,6 +214,7 @@
     <Content Include="Views\Home\Deconnexion.cshtml" />
     <Content Include="Views\Commande\Index.cshtml" />
     <Content Include="Views\Commande\Details.cshtml" />
+    <Content Include="Views\Commande\Modifier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

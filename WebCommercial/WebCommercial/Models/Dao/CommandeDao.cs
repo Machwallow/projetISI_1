@@ -32,10 +32,10 @@ namespace WebCommercial.Models.Dao
                 foreach (DataRow dataRow in dt.Rows)
                 {
                     comm = new Commande();
-                    comm.NoComm = Int16.Parse(dataRow[0].ToString());
-                    tempNoComm = comm.NoComm;
-                    comm.NoVendeur = Int16.Parse(dataRow[1].ToString());
-                    comm.NoClient = Int16.Parse(dataRow[2].ToString());
+                    comm.NuComm = Int16.Parse(dataRow[0].ToString());
+                    tempNoComm = comm.NuComm;
+                    comm.NuVendeur = Int16.Parse(dataRow[1].ToString());
+                    comm.NuClient = Int16.Parse(dataRow[2].ToString());
                     comm.DateComm = dataRow[3].ToString();
                     comm.Fact = dataRow[4].ToString();
 
@@ -103,9 +103,9 @@ namespace WebCommercial.Models.Dao
                 {
                     comm = new Commande();
                     DataRow dataRow = dt.Rows[0];
-                    comm.NoComm = Int16.Parse(dataRow[0].ToString());
-                    comm.NoVendeur = Int16.Parse(dataRow[1].ToString());
-                    comm.NoClient = Int16.Parse(dataRow[2].ToString());
+                    comm.NuComm = Int16.Parse(dataRow[0].ToString());
+                    comm.NuVendeur = Int16.Parse(dataRow[1].ToString());
+                    comm.NuClient = Int16.Parse(dataRow[2].ToString());
                     comm.DateComm = dataRow[3].ToString();
                     comm.Fact = dataRow[4].ToString();
 

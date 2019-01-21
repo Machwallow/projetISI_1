@@ -7,7 +7,7 @@ namespace WebCommercial.Models.Metier
 {
     public class Vendeur
     {
-        private int noVendeur;
+        private int nuVendeur;
         private String nomVendeur;
         private String preVendeur;
         private String dateEmb;
@@ -15,7 +15,7 @@ namespace WebCommercial.Models.Metier
         private double salVendeur;
         private double commission;
 
-        public int NoVendeur { get => noVendeur; set => noVendeur = value; }
+        public int NuVendeur { get => nuVendeur; set => nuVendeur = value; }
         public string NomVendeur { get => nomVendeur; set => nomVendeur = value; }
         public string DateEmb { get => dateEmb; set => dateEmb = value; }
         public string VilleVendeur { get => villeVendeur; set => villeVendeur = value; }
@@ -25,7 +25,7 @@ namespace WebCommercial.Models.Metier
 
         public Vendeur(int noVendeur, string nomVendeur, string preVendeur, string dateEmb, string villeVendeur, double salVendeur, double commission)
         {
-            this.NoVendeur = noVendeur;
+            this.NuVendeur = noVendeur;
             this.NomVendeur = nomVendeur;
             this.PreVendeur = preVendeur;
             this.DateEmb = dateEmb;

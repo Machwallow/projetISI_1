@@ -19,6 +19,7 @@ namespace WebApplication1.Controllers
             try
             {
                 clients = ClientDao.getClients();
+                return View(clients);
             }
             catch (MonException e)
             {
@@ -26,7 +27,6 @@ namespace WebApplication1.Controllers
                 return View("Error");
             }
 
-            return View(clients);
         }
 
         // GET: Commande/Edit/5
@@ -41,7 +41,7 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
 
-                              }
+            }
         }
 
         [HttpPost]

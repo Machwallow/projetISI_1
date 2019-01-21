@@ -13,7 +13,7 @@ namespace WebCommercial.Models.Metier
     {
         //Definition des attributs
 
-        private String noClient;
+        private String nuClient;
         private String societe;
         private String nomCl;
         private String prenomCl;
@@ -36,10 +36,10 @@ namespace WebCommercial.Models.Metier
             set { nomCl = value; }
         }
 
-        public String NoClient
+        public String NuClient
         {
-            get { return noClient; }
-            set { noClient = value; }
+            get { return nuClient; }
+            set { nuClient = value; }
         }
 
         public String PrenomCl
@@ -72,7 +72,7 @@ namespace WebCommercial.Models.Metier
         /// </summary>
         public Clientel()
         {
-            noClient = "";
+            nuClient = "";
             societe = "";
             nomCl = "";
             prenomCl = "";
@@ -85,7 +85,7 @@ namespace WebCommercial.Models.Metier
         /// </summary>
         public Clientel(string no, string soc, string nom, string prenom, string adresse, string ville, String codePostal)
         {
-            noClient = no;
+            nuClient = no;
             societe = soc;
             nomCl = nom;
             prenomCl = prenom;
