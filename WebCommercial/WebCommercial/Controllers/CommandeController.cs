@@ -29,14 +29,13 @@ namespace WebCommercial.Controllers
             return View(commandes);
         }
 
-        public ActionResult Details(String nuComm)
+        public ActionResult Details(int nuComm)
         {
             Commande comm = null;
-            int tempNuComm = Int16.Parse(nuComm);
             try
             {
-                comm = CommandeDao.getCommande(tempNuComm);
-                comm.ListArticles = ArticleDao.getArticlesByNoComm(tempNuComm);
+                comm = CommandeDao.getCommande(nuComm);
+                comm.ListArticles = ArticleDao.getArticlesByNoComm(nuComm);
                 return View(comm);
             }
             catch (MonException e)
