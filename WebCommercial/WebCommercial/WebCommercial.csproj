@@ -163,6 +163,7 @@
     <Compile Include="Models\Metier\Clientel.cs" />
     <Compile Include="Models\Dao\UtilisateurDao.cs" />
     <Compile Include="Models\Metier\Commande.cs" />
+    <Compile Include="Models\Metier\ModifCommande.cs" />
     <Compile Include="Models\Metier\Utilisateur.cs" />
     <Compile Include="Models\Metier\Vendeur.cs" />
     <Compile Include="Models\Persistance\Connexion.cs" />

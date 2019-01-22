@@ -43,5 +43,41 @@ namespace WebCommercial.Controllers
                 return HttpNotFound();
             }
         }
+
+        public ActionResult Modifier(int nuComm)
+        {
+            Commande comm = null;
+            ModifCommande modComm = null;
+            IEnumerable<Clientel> listClients= null;
+            IEnumerable<Vendeur> listVendeurs = null;
+
+            try
+            {
+                comm = CommandeDao.getCommande(nuComm);
+                listClients = ClientDao.getClients();
+                listVendeurs = VendeurDao.getVendeurs();
+                modComm = new ModifCommande(comm, listClients, listVendeurs);
+                return View(modComm);
+            }
+            catch (MonException e)
+            {
+                return HttpNotFound();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Modifier(ModifCommande modComm)
+        {
+
+            try
+            {
+                CommandeDao.updateComm(modComm.Comm);
+                return View("Index");
+            }
+            catch (MonException e)
+            {
+                return HttpNotFound();
+            }
+        }
     }
 }

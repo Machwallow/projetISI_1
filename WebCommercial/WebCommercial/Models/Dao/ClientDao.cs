@@ -12,15 +12,15 @@ namespace WebCommercial.Models.Dao
 {
     public class ClientDao
     {
-        public static List<String> LectureNoClient()
+        public static List<int> LectureNuClient()
         {
             /// <summary>
             /// Lister les clients de la base
             /// </summary>
             /// <returns>Liste de numéros de clients</returns>
-            List<String> mesNumeros = new List<String>();
+            List<int> mesNumeros = new List<int>();
             DataTable dt;
-            Serreurs er = new Serreurs("Erreur sur lecture du client.", "Client.LectureNoClient()");
+            Serreurs er = new Serreurs("Erreur sur lecture des clients.", "Client.LectureNuClient()");
             try
             {
 
@@ -29,7 +29,7 @@ namespace WebCommercial.Models.Dao
 
                 foreach (DataRow dataRow in dt.Rows)
                 {
-                    mesNumeros.Add((dataRow[0]).ToString());
+                    mesNumeros.Add(Int16.Parse(dataRow[0].ToString()));
                 }
 
                 return mesNumeros;

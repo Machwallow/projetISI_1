@@ -152,5 +152,33 @@ namespace WebCommercial.Models.Dao
                 throw new MonException(er.MessageUtilisateur(), er.MessageApplication(), e.Message);
             }
         }
+
+
+        public static void updateComm(Commande comm)
+        {
+            Serreurs er = new Serreurs("Erreur sur l'écriture d'une commande.", "CommandeDao.updateComm()");
+            String requete = "UPDATE commandes SET " +
+                                  "NO_COMMAND = '" + comm.NuComm + "'" +
+                                  ", NO_VENDEUR = '" + comm.NuVendeur + "'" +
+                                  ", NO_CLIENT = '" + comm.NuClient + "'" +
+                                  ", DATE_CDE = '" + comm.DateComm + "'" +
+                                   ", FACTURE = '" + comm.Fact + "'" +
+                                   " WHERE NO_CLIENT LIKE '" + comm.NuComm + "'";
+            try
+            {
+                DBInterface.Insertion_Donnees(requete);
+            }
+            catch (MonException erreur)
+            {
+                throw erreur;
+            }
+            catch (MySqlException e)
+            {
+                throw new MonException(er.MessageUtilisateur(), er.MessageApplication(), e.Message);
+            }
+
+        }
+
+
     }
 }

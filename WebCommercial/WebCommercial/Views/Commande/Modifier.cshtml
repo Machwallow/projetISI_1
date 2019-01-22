@@ -1,6 +1,6 @@
 ﻿
 
-@model  WebCommercial.Models.Metier.Commande
+@model  WebCommercial.Models.Metier.ModifCommande
 @{
     ViewBag.Title = "Modifier";
     Layout = "~/Views/Shared/_LayoutCommercial.cshtml";
@@ -13,61 +13,75 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <h4>Client</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.NuComm, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.NuComm, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
-                    @Html.ValidationMessageFor(model => model.NuClient, "", new { @class = "text-danger" })
-                    <input name="NoClient" type="HIDDEN" value=@(@Model.NuComm) id="NoClient" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">Société</label>
-                <div class="col-md-10">
-                    <input name="Societe" type="text" class="form-control" value=@(@Model.Societe) id="Societe" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">NomClient</label>
-                <div class="col-md-10">
-                    <input name="NomCl" type="text" class="form-control" value=@(@Model.NomCl) id="NomCl" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">PrénomClient</label>
-                <div class="col-md-10">
-                    <input name="PrenomCl" type="text" class="form-control" value=@(@Model.PrenomCl) id="PrenomCl" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">Adresse client</label>
-                <div class="col-md-10">
-                    <input name="AdresseCl" type="text" class="form-control" value=@(@Model.AdresseCl) id="AdresseCl" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">Code Postal client</label>
-                <div class="col-md-10">
-                    <input name="CodePostCl" type="text" class="form-control" value=@(@Model.CodePostCl) id="CodePostCl" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">Ville client</label>
-                <div class="col-md-10">
-                    <input name="VilleCl" type="text" class="form-control" value=@(@Model.VilleCl) id="VilleCl" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Enregistrer" class="btn btn-primary" />
-
-                </div>
-            </div>
+<div class="form-horizontal">
+    <h4>Commande</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Comm.NuComm, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Comm.NuComm, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+            @Html.ValidationMessageFor(model => model.Comm.NuComm, "", new { @class = "text-danger" })
+            <input name="NuComm" type="HIDDEN" value=@(@Model.Comm.NuComm) id="NuComm" />
         </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Société</label>
+        <div class="col-md-10">
+            <select name="nuVendeur" id="NuVendeur" class="selectpicker">
+                @foreach (var vendeur in Model.ListVendeurs)
+                {
+                    if (vendeur.NuVendeur == Model.Comm.NuVendeur)
+                    {
+                        <option selected="selected">@vendeur.NuVendeur</option>
+                    }
+                    else
+                    {
+                        <option>@vendeur.NuVendeur</option>
+                    }
+
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">N° Client</label>
+        <div class="col-md-10">
+            <select name="nuClient" id="NuClient" class="selectpicker">
+                @foreach (var client in Model.ListClients)
+                {
+                    if (Int16.Parse(client.NuClient) == Model.Comm.NuClient)
+                    {
+                        <option selected="selected">@client.NuClient</option>
+                    }
+                    else
+                    {
+                        <option>@client.NuClient</option>
+                    }
+
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">PrénomClient</label>
+        <div class="col-md-10">
+            <input name="dateComm" type="text" class="form-control" value=@(@Model.Comm.DateComm) id="DateComm" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Adresse client</label>
+        <div class="col-md-10">
+            <input name="fact" type="text" class="form-control" value=@(@Model.Comm.Fact) id="Fact" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Enregistrer" class="btn btn-primary" />
+
+        </div>
+    </div>
+</div>
 
     }
 }
