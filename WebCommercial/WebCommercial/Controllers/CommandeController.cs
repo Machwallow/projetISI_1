@@ -90,5 +90,24 @@ namespace WebCommercial.Controllers
                 return HttpNotFound();
             }
         }
+
+        public ActionResult Ajout()
+        {
+            ModifCommande modComm = null;
+            IEnumerable<Clientel> listClients = null;
+            IEnumerable<Vendeur> listVendeurs = null;
+
+            try
+            {
+                listClients = ClientDao.getClients();
+                listVendeurs = VendeurDao.getVendeurs();
+                modComm = new ModifCommande(listClients, listVendeurs);
+                return View(modComm);
+            }
+            catch (MonException e)
+            {
+                return HttpNotFound();
+            }
+        }
     }
 }

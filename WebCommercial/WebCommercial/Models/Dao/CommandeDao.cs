@@ -13,6 +13,8 @@ namespace WebCommercial.Models.Dao
 {
     public class CommandeDao
     {
+
+        private static String pattern = @"(\d{2})/(\d{2})/(\d{4})";
         /// <summary>
         /// Permet de récupérer les commandes
         /// </summary>
@@ -37,7 +39,9 @@ namespace WebCommercial.Models.Dao
                     tempNoComm = comm.NuComm;
                     comm.NuVendeur = dataRow[1].ToString();
                     comm.NuClient = dataRow[2].ToString();
-                    comm.DateComm = dataRow[3].ToString();
+                    Match match = Regex.Match(dataRow[3].ToString(), pattern);
+                    String temp = match.Groups[3].Value + "-" + match.Groups[2].Value + "-" + match.Groups[1].Value;
+                    comm.DateComm = temp;
                     comm.Fact = dataRow[4].ToString();
 
                     try
@@ -102,15 +106,15 @@ namespace WebCommercial.Models.Dao
 
                 if(dt.IsInitialized && dt.Rows.Count > 0)
                 {
-                    String pattern= @"(\d{4})-(\d{2})-(\d{2})";
+                    
                     
                     comm = new Commande();
                     DataRow dataRow = dt.Rows[0];
                     comm.NuComm = dataRow[0].ToString();
                     comm.NuVendeur = dataRow[1].ToString();
                     comm.NuClient = dataRow[2].ToString();
-                    MatchCollection matches = Regex.Matches(dataRow[3].ToString(), pattern);
-                    String temp = dataRow[3].ToString().Replace('/', '-');
+                    Match match = Regex.Match(dataRow[3].ToString(), pattern);
+                    String temp = match.Groups[3].Value + "-" + match.Groups[2].Value + "-" + match.Groups[1].Value; 
                     comm.DateComm = temp;
                     comm.Fact = dataRow[4].ToString();
 
