@@ -27,7 +27,7 @@ namespace WebCommercial.Controllers
                 String mdp = Request["pwd"];
                 try
                 {
-                    Utilisateur unUtilisateur = UtilisateurDao.getUtilistateur(login);
+                    Utilisateur unUtilisateur = UtilisateurDao.GetUtilistateur(login);
                     if (unUtilisateur != null)
                     {
                         try

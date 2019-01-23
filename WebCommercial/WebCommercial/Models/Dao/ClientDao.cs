@@ -12,13 +12,13 @@ namespace WebCommercial.Models.Dao
 {
     public class ClientDao
     {
-        public static List<int> LectureNuClient()
+        public static List<String> GetNuClients()
         {
             /// <summary>
             /// Lister les clients de la base
             /// </summary>
             /// <returns>Liste de numéros de clients</returns>
-            List<int> mesNumeros = new List<int>();
+            List<String> mesNumeros = new List<String>();
             DataTable dt;
             Serreurs er = new Serreurs("Erreur sur lecture des clients.", "Client.LectureNuClient()");
             try
@@ -29,7 +29,7 @@ namespace WebCommercial.Models.Dao
 
                 foreach (DataRow dataRow in dt.Rows)
                 {
-                    mesNumeros.Add(Int16.Parse(dataRow[0].ToString()));
+                    mesNumeros.Add(dataRow[0].ToString());
                 }
 
                 return mesNumeros;
@@ -44,7 +44,7 @@ namespace WebCommercial.Models.Dao
         /// Lire un utilisateur sur son ID
         /// </summary>
         /// <param name="numCli">N° de l'utilisateur à lire</param>
-        public static Clientel getClient(String numCli)
+        public static Clientel GetClient(String numCli)
         {
 
             String mysql;
@@ -86,7 +86,7 @@ namespace WebCommercial.Models.Dao
         /// récupération de la liste des clients
         /// </summary>
         /// <returns>Liste des clients</returns>
-        public static IEnumerable<Clientel> getClients()
+        public static IEnumerable<Clientel> GetClients()
         {
             IEnumerable<Clientel> clients = new List<Clientel>();
             DataTable dt;
@@ -129,7 +129,7 @@ namespace WebCommercial.Models.Dao
         /// mise à jour d'un client sur son ID
         /// </summary>
         /// <param name="numCli">N° de l'utilisateur à lire</param>
-        public static void updateClient(Clientel unCli)
+        public static void UpdateClient(Clientel unCli)
         {
             Serreurs er = new Serreurs("Erreur sur l'écriture d'un client.", "Client.update()");
             String requete = "UPDATE Clientel SET " +

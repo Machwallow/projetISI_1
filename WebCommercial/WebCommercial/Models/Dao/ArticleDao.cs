@@ -13,7 +13,7 @@ namespace WebCommercial.Models.Dao
     public class ArticleDao
     {
 
-        public static IEnumerable<Article> getArticlesByNoComm(string nuComm)
+        public static IEnumerable<Article> GetArticlesByNoComm(string nuComm)
         {
             IEnumerable<Article> articles = new List<Article>();
             DataTable dt;

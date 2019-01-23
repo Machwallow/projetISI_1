@@ -13,7 +13,7 @@ namespace WebCommercial.Models.Dao
     public class VendeurDao
     {
 
-        public static IEnumerable<Vendeur> getVendeurs()
+        public static IEnumerable<Vendeur> GetVendeurs()
         {
             IEnumerable<Vendeur> vendeurs = new List<Vendeur>();
             DataTable dt;
@@ -41,6 +41,35 @@ namespace WebCommercial.Models.Dao
                 }
 
                 return vendeurs;
+            }
+            catch (MonException e)
+            {
+                throw new MonException(er.MessageUtilisateur(), er.MessageApplication(), e.Message);
+            }
+            catch (MySqlException e)
+            {
+                throw new MonException(er.MessageUtilisateur(), er.MessageApplication(), e.Message);
+            }
+        }
+
+        public static IEnumerable<String> GetNuVendeurs()
+        {
+            IEnumerable<String> nuVendeurs = new List<String>();
+            DataTable dt;
+            Serreurs er = new Serreurs("Erreur sur lecture des vendeurs.", "VendeurDao.getNuVendeurs()");
+            try
+            {
+                String mysql = "SELECT NO_VENDEUR FROM vendeur ORDER BY NO_VENDEUR";
+
+                dt = DBInterface.Lecture(mysql, er);
+
+                foreach (DataRow dataRow in dt.Rows)
+                {
+
+                    ((List<String>)nuVendeurs).Add(dataRow[0].ToString());
+                }
+
+                return nuVendeurs;
             }
             catch (MonException e)
             {

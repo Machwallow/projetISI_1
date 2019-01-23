@@ -18,7 +18,7 @@ namespace WebCommercial.Controllers
 
             try
             {
-                clients = ClientDao.getClients();
+                clients = ClientDao.GetClients();
                 return View(clients);
             }
             catch (MonException e)
@@ -34,7 +34,7 @@ namespace WebCommercial.Controllers
         {
             try
             {
-                Clientel unCl = ClientDao.getClient(id);
+                Clientel unCl = ClientDao.GetClient(id);
                 return View(unCl);
             }
             catch (MonException e)
@@ -52,7 +52,7 @@ namespace WebCommercial.Controllers
                 // utilisation possible de Request
                //  String s= Request["Societe"];
 
-                ClientDao.updateClient(unC);
+                ClientDao.UpdateClient(unC);
                 return View();
             }
             catch (MonException e)

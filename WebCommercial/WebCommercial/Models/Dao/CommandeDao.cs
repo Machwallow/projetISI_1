@@ -19,7 +19,7 @@ namespace WebCommercial.Models.Dao
         /// Permet de récupérer les commandes
         /// </summary>
         /// <returns>List de commandes</returns>
-        public static IEnumerable<Commande> getCommandes()
+        public static IEnumerable<Commande> GetCommandes()
         {
             IEnumerable<Commande> commandes = new List<Commande>();
             String tempNoComm;
@@ -92,7 +92,7 @@ namespace WebCommercial.Models.Dao
         /// </summary>
         /// <param name="nuComm"></param>
         /// <returns>Une commande</returns>
-        public static Commande getCommande(String nuComm)
+        public static Commande GetCommande(String nuComm)
         {
 
             DataTable dt;
@@ -162,8 +162,41 @@ namespace WebCommercial.Models.Dao
             }
         }
 
+        public static String GetMaxNuComm()
+        {
 
-        public static void updateComm(Commande comm)
+            DataTable dt;
+            Serreurs er = new Serreurs("Erreur sur lecture du num max.", "CommandeDao.getMaxNuComm()");
+            try
+            {
+                String mysql = "SELECT MAX(NO_COMMAND)+1 FROM commandes";
+
+                dt = DBInterface.Lecture(mysql, er);
+
+
+                if (dt.IsInitialized && dt.Rows.Count > 0)
+                {
+                    DataRow dataRow = dt.Rows[0];
+                    String temp = dataRow[0].ToString();
+
+                    String max = temp.PadLeft(6, '0');
+
+                    return max;
+                }
+                else
+                    return null;
+            }
+            catch (MonException e)
+            {
+                throw new MonException(er.MessageUtilisateur(), er.MessageApplication(), e.Message);
+            }
+            catch (MySqlException e)
+            {
+                throw new MonException(er.MessageUtilisateur(), er.MessageApplication(), e.Message);
+            }
+        }
+
+        public static void UpdateComm(Commande comm)
         {
             Serreurs er = new Serreurs("Erreur sur l'écriture d'une commande.", "CommandeDao.updateComm()");
             String requete = "UPDATE commandes SET " +
@@ -187,6 +220,51 @@ namespace WebCommercial.Models.Dao
 
         }
 
+        public static void AddComm(Commande comm)
+        {
+            Serreurs er = new Serreurs("Erreur sur l'insertion d'une commande.", "CommandeDao.AddComm()");
+            String requete = "INSERT INTO commandes VALUES " +
+                                  "NO_COMMAND ='" + comm.NuComm + "'" +
+                                  ", NO_VENDEUR ='" + comm.NuVendeur + "'" +
+                                  ", NO_CLIENT ='" + comm.NuClient + "'" +
+                                  ", DATE_CDE ='" + comm.DateComm + "' " +
+                                   ", FACTURE ='" + comm.Fact + "'" +
+                                   " WHERE NO_COMMAND ='" + comm.NuComm + "'";
+            try
+            {
+                DBInterface.Insertion_Donnees(requete);
+            }
+            catch (MonException erreur)
+            {
+                throw erreur;
+            }
+            catch (MySqlException e)
+            {
+                throw new MonException(er.MessageUtilisateur(), er.MessageApplication(), e.Message);
+            }
+
+        }
+
+
+        public static void DelComm(String nuComm)
+        {
+            Serreurs er = new Serreurs("Erreur sur l'insertion d'une commande.", "CommandeDao.AddComm()");
+            String requete = "DELETE FROM commandes WHERE " + 
+                                "NO_COMMAND ='" + nuComm + "'";
+            try
+            {
+                DBInterface.Insertion_Donnees(requete);
+            }
+            catch (MonException erreur)
+            {
+                throw erreur;
+            }
+            catch (MySqlException e)
+            {
+                throw new MonException(er.MessageUtilisateur(), er.MessageApplication(), e.Message);
+            }
+
+        }
 
     }
 }

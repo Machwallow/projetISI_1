@@ -41,12 +41,12 @@
                         <td>@Html.DisplayFor(modelItem => item.VilleCl) </td>
                         <td style="text-align:center;">
                             <span>
-                                @Html.ActionLink("  ", "Modifier", "Client", new { id = item.NuClient }, new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-pencil" })
+                                @Html.ActionLink("  ", "Modifier", "Client", new { id = item.NuClient }, new { @class = "btn btn-default btn-warning glyphicon glyphicon glyphicon-pencil" })
                             </span>
                         </td>
                         <td style="text-align:center;">
                             <span>
-                                @Html.ActionLink("  ", "Supprimer", "Client", new { id = item.NuClient }, new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-remove" })
+                                @Html.ActionLink("  ", "Supprimer", "Client", new { id = item.NuClient }, new { @class = "btn btn-default btn-danger glyphicon glyphicon glyphicon-remove" })
                             </span>
                         </td>
                     </tr>

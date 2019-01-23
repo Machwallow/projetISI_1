@@ -11,90 +11,88 @@
 @if (Model != null)
 {
 
-    using (Html.BeginForm())
+    using (Html.BeginForm("AjoutConf","Commande"))
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <h4>Commande</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                <label class="control-label col-md-2">N° Commande</label>
-                <div class="col-md-10">
-                    <input name="NuComm" id="NuComm" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">N° Vendeur</label>
-                <div class="col-md-10">
-                    <select name="NuVendeur" id="NuVendeur" class="selectpicker form-control">
-                        @{ 
-                            int i = 0;
-                            foreach (var vendeur in Model.ListVendeurs)
-                            {
-                                if (i == 0)
-                                {
-                                    <option selected="selected">@vendeur.NuVendeur</option>
-                                    i++;
-                                }
-                                else
-                                {
-                                    <option>@vendeur.NuVendeur </option >
-                                }
-                            }
-                            }
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">N° Client</label>
-                <div class="col-md-10">
-                    <select name="NuClient" id="NuClient" class="selectpicker form-control">
-                        @{
-                            i = 0;
-                            foreach (var client in Model.ListClients)
-                            {
-                                if (i == 0)
-                                {
-                                    <option selected="selected">@client.NuClient</option>
-                                    i++;
-                                }
-                                else
-                                {
-                                    <option>@client.NuClient </option>
-                                }
-                            }
-                        }
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">Date de commande</label>
-                <div class="col-md-10">
-                    <input name="DateComm" type="date" class="form-control" value=@str    id="DateComm" />
-
-</div>
-
-</div>
-
-<div class="form-group">
-                <label class="control-label col-md-2">Facturée :</label>
-                <div class="col-md-10">
-                    <span>True</span>
-                    <input name="Fact" type="radio" value="T" checked="checked" id="FactT" />
-                    <br />
-                    <span>False</span>
-                    <input name="Fact" type="radio" value="F" id="FactF" />
-                </div>
-
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Ajouter" class="btn btn-primary" />
-                </div>
+    <div class="form-horizontal">
+        <h4>Commande</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">N° Commande</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NuCommMax, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+                @Html.ValidationMessageFor(model => model.NuCommMax, "", new { @class = "text-danger" })
+                <input name="NuComm" type="HIDDEN" value=@(@Model.NuCommMax) id="NuComm" />
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">N° Vendeur</label>
+            <div class="col-md-10">
+                <select name="NuVendeur" id="NuVendeur" class="selectpicker form-control">
+                    @{
+                        int i = 0;
+                        foreach (String nuVendeur in Model.ListNuVendeurs)
+                        {
+                            if (i == 0)
+                            {
+                                <option selected="selected">@nuVendeur</option>
+                                i++;
+                            }
+                            else
+                            {
+                                <option>@nuVendeur </option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">N° Client</label>
+            <div class="col-md-10">
+                <select name="NuClient" id="NuClient" class="selectpicker form-control">
+                    @{
+                        i = 0;
+                        foreach (String nuClient in Model.ListNuClients)
+                        {
+                            if (i == 0)
+                            {
+                                <option selected="selected">@nuClient</option>
+                                i++;
+                            }
+                            else
+                            {
+                                <option>@nuClient </option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Date de commande</label>
+            <div class="col-md-10">
+                <input name="DateComm" type="date" class="form-control" value=@str id="DateComm" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Facturée :</label>
+            <div class="col-md-10">
+                <span>True</span>
+                <input name="Fact" type="radio" value="T" checked="checked" id="FactT" />
+                <br />
+                <span>False</span>
+                <input name="Fact" type="radio" value="F" id="FactF" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Ajouter" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
     }
 }
 

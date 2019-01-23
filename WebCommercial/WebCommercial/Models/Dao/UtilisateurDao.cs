@@ -10,7 +10,7 @@ namespace WebCommercial.Models.Metier
 {
     public class UtilisateurDao
     {
-        public static Utilisateur getUtilistateur(String nom)
+        public static Utilisateur GetUtilistateur(String nom)
         {
             DataTable dt;
             Utilisateur unUti = null;

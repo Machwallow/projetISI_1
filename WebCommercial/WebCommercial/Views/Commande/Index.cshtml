@@ -24,33 +24,39 @@
                         <th>Facture </th>
                         <th style="width:80px">Détails</th>
                         <th style="width:80px">Modifier</th>
+                        <th style="width:80px">Supprimer</th>
                     </tr>
                 </thead>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.NuComm)</td>
-                        <td>@Html.DisplayFor(modelItem => item.NuVendeur)</td>
-                        <td>@Html.DisplayFor(modelItem => item.NuClient) </td>
-                        <td>@Html.DisplayFor(modelItem => item.DateComm)</td>
-                        <td>@Html.DisplayFor(modelItem => item.NbArticles) </td>
-                        <td>@Html.DisplayFor(modelItem => item.Fact)</td>
-                        <td style="text-align:center;">
-                            <span>
-                                @Html.ActionLink("Details", "Details", "Commande", new { nuComm = item.NuComm }, new { @class = "btn btn-default btn-primary" })
-                            </span>
-                        </td>
-                        <td style="text-align:center;">
-                            <span>
-                                @Html.ActionLink("  ", "Modifier", "Commande", new { nuComm = item.NuComm }, new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-pencil" })
-                            </span>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.NuComm)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NuVendeur)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NuClient) </td>
+                    <td>@Html.DisplayFor(modelItem => item.DateComm)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NbArticles) </td>
+                    <td>@Html.DisplayFor(modelItem => item.Fact)</td>
+                    <td style="text-align:center;">
+                        <span>
+                            @Html.ActionLink("  ", "Details", "Commande", new { nuComm = item.NuComm }, new { @class = "btn btn-default btn-primary glyphicon glyphicon glyphicon-info-sign" })
+                        </span>
+                    </td>
+                    <td style="text-align:center;">
+                        <span>
+                            @Html.ActionLink("  ", "Modifier", "Commande", new { nuComm = item.NuComm }, new { @class = "btn btn-default btn-warning glyphicon glyphicon glyphicon-pencil" })
+                        </span>
+                    </td>
+                    <td style="text-align:center;">
+                        <span>
+                            @Html.ActionLink("  ", "ShowSupprimer", "Commande", new { nuComm = item.NuComm }, new { @class = "btn btn-default btn-danger glyphicon glyphicon glyphicon-trash" })
+                        </span>
+                    </td>
+                </tr>
                 }
             </table>
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-                    @Html.ActionLink("Ajouter des commande", "Ajout", "Commande", new { @class = "btn btn-default btn-primary" })
+                    @Html.ActionLink("Ajouter des commande", "Ajout", "Commande", new { @class = "btn btn-default btn-success" })
                 </div>
             </div>
         </div>

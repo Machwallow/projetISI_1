@@ -1,0 +1,42 @@
+﻿@model WebCommercial.Models.Metier.Commande
+@{
+    ViewBag.Title = "Supprimer";
+    Layout = "~/Views/Shared/_LayoutCommercial.cshtml";
+}
+
+<h2>Supprimer la commande N°@Model.NuComm</h2>
+@if (Model != null)
+{
+    using (Html.BeginForm("Supprimer", "Commande"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+            <p>
+                <strong>Voulez-vous supprimer la commande N°@Html.DisplayFor(model => model.NuComm) ?</strong>
+                <input name="NuComm" type="hidden" value=@Model.NuComm />
+            </p>
+        </div>
+        <div>
+            <p>
+                <strong>Passée le :</strong> @Html.DisplayFor(model => model.DateComm)
+            </p>
+        </div>
+        <div>
+            <p>
+                <strong>Montant total :</strong> @Html.DisplayFor(model => model.TotalCost) €
+            </p>
+        </div>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-2">
+                    <input type="submit" value="Supprimer" class="btn btn-default btn-danger" />
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    @Html.ActionLink("Retour", "Index", "Commande", null, new { @class = "btn btn-default btn-primary" })
+                </div>
+            </div>
+        </div>
+
+    }
+}

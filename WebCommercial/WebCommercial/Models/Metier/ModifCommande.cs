@@ -11,24 +11,27 @@ namespace WebCommercial.Models.Metier
     public class ModifCommande
     {
         private Commande comm;
-        private IEnumerable<Clientel> listClients;
-        private IEnumerable<Vendeur> listVendeurs;
+        private IEnumerable<String> listNuClients;
+        private IEnumerable<String> listNuVendeurs;
+        private String nuCommMax;
 
         public Commande Comm { get => comm; set => comm = value; }
-        public IEnumerable<Clientel> ListClients { get => listClients; set => listClients = value; }
-        public IEnumerable<Vendeur> ListVendeurs { get => listVendeurs; set => listVendeurs = value; }
+        public IEnumerable<String> ListNuClients { get => listNuClients; set => listNuClients = value; }
+        public IEnumerable<String> ListNuVendeurs { get => listNuVendeurs; set => listNuVendeurs = value; }
+        public string NuCommMax { get => nuCommMax; set => nuCommMax = value; }
 
-        public ModifCommande(Commande comm, IEnumerable<Clientel> listClients, IEnumerable<Vendeur> listVendeurs)
+        public ModifCommande(Commande comm, IEnumerable<String> listNuClients, IEnumerable<String> listNuVendeurs)
         {
             Comm = comm;
-            ListClients = listClients;
-            ListVendeurs = listVendeurs;
+            ListNuClients = listNuClients;
+            ListNuVendeurs = listNuVendeurs;
         }
 
-        public ModifCommande(IEnumerable<Clientel> listClients, IEnumerable<Vendeur> listVendeurs)
+        public ModifCommande(String nuCommMax, IEnumerable<String> listNuClients, IEnumerable<String> listNuVendeurs)
         {
-            ListClients = listClients;
-            ListVendeurs = listVendeurs;
+            NuCommMax = nuCommMax;
+            ListNuClients = listNuClients;
+            ListNuVendeurs = listNuVendeurs;
         }
 
         public ModifCommande()

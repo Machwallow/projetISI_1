@@ -19,7 +19,7 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(model => model.Comm.NuComm, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="control-label col-md-2">N° Commande</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.Comm.NuComm, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
             @Html.ValidationMessageFor(model => model.Comm.NuComm, "", new { @class = "text-danger" })
@@ -30,15 +30,15 @@
         <label class="control-label col-md-2">N° Vendeur</label>
         <div class="col-md-10">
             <select name="NuVendeur" id="NuVendeur" class="selectpicker form-control">
-                @foreach (var vendeur in Model.ListVendeurs)
+                @foreach (String nuVendeur in Model.ListNuVendeurs)
                 {
-                    if (vendeur.NuVendeur == Model.Comm.NuVendeur)
+                    if (nuVendeur == Model.Comm.NuVendeur)
                     {
-                        <option selected="selected">@vendeur.NuVendeur</option>
+                        <option selected="selected">@nuVendeur</option>
                     }
                     else
                     {
-                        <option>@vendeur.NuVendeur</option>
+                        <option>@nuVendeur</option>
                     }
 
                 }
@@ -49,15 +49,15 @@
         <label class="control-label col-md-2">N° Client</label>
         <div class="col-md-10">
             <select name="NuClient" id="NuClient" class="selectpicker form-control">
-                @foreach (var client in Model.ListClients)
+                @foreach (String nuClient in Model.ListNuClients)
                 {
-                    if (client.NuClient == Model.Comm.NuClient)
+                    if (nuClient == Model.Comm.NuClient)
                     {
-                        <option selected="selected">@client.NuClient</option>
+                        <option selected="selected">@nuClient</option>
                     }
                     else
                     {
-                        <option>@client.NuClient</option>
+                        <option>@nuClient</option>
                     }
 
                 }
@@ -94,7 +94,10 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Enregistrer" class="btn btn-primary" />
+            <input type="submit" value="Enregistrer" class="btn btn-success" />
+        </div>
+        <div>
+            @Html.ActionLink("Fermer", "Index", "Commande", new { @class = "btn btn-default btn-outline-secondary" })
         </div>
     </div>
 </div>
