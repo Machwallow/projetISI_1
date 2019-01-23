@@ -8,7 +8,7 @@ namespace WebCommercial.Models.Metier
     public class Article
     {
 
-        private int nuArticle;
+        private String nuArticle;
         private String libArticle;
         private int qteDispo;
         private String villeArticle;
@@ -17,7 +17,7 @@ namespace WebCommercial.Models.Metier
         private int qteComm;
         private double totalCost;
 
-        public int NuArticle { get => nuArticle; set => nuArticle = value; }
+        public String NuArticle { get => nuArticle; set => nuArticle = value; }
         public string LibArticle { get => libArticle; set => libArticle = value; }
         public int QteDispo { get => qteDispo; set => qteDispo = value; }
         public string VilleArticle { get => villeArticle; set => villeArticle = value; }
@@ -26,9 +26,9 @@ namespace WebCommercial.Models.Metier
         public int QteComm { get => qteComm; set => qteComm = value; }
         public double TotalCost { get => PrixArticle * QteComm; set => totalCost = value; }
 
-        public Article(int noArticle, string libArticle, int qteDispo, string villeArticle, double prixArticle, string interr)
+        public Article(String nuArticle, string libArticle, int qteDispo, string villeArticle, double prixArticle, string interr)
         {
-            NuArticle = noArticle;
+            NuArticle = nuArticle;
             LibArticle = libArticle;
             QteDispo = qteDispo;
             VilleArticle = villeArticle;

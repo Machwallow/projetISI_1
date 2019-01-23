@@ -7,7 +7,7 @@ using WebCommercial.Models.Metier;
 using WebCommercial.Models.MesExceptions;
 using WebCommercial.Models.Dao;
 
-namespace WebApplication1.Controllers
+namespace WebCommercial.Controllers
 {
     public class ClientController : Controller
     {

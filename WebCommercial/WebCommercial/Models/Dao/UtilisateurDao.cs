@@ -26,7 +26,7 @@ namespace WebCommercial.Models.Metier
                     unUti = new Utilisateur();
                     // il faut redecouper la liste pour retrouver les lignes
                     DataRow dataRow = dt.Rows[0];
-                    unUti.NumUtil = Int16.Parse(dataRow[0].ToString());
+                    unUti.NumUtil = dataRow[0].ToString();
                     unUti.NomUtil = dataRow[1].ToString();
                     unUti.MotPasse = dataRow[2].ToString();
                     unUti.Role = dataRow[3].ToString();

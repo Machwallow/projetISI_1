@@ -28,13 +28,14 @@ namespace WebCommercial.Models.Dao
                 foreach (DataRow dataRow in dt.Rows)
                 {
                     vendeur = new Vendeur();
-                    vendeur.NuVendeur = Int16.Parse(dataRow[0].ToString());
-                    vendeur.NuVendeurChefEquipe = Int16.Parse(dataRow[1].ToString());
+                    vendeur.NuVendeur = dataRow[0].ToString();
+                    vendeur.NuVendeurChefEquipe = dataRow[1].ToString();
                     vendeur.NomVendeur = dataRow[2].ToString();
                     vendeur.PreVendeur = dataRow[3].ToString();
-                    vendeur.VilleVendeur = dataRow[4].ToString();
-                    vendeur.SalVendeur = Double.Parse(dataRow[5].ToString());
-                    vendeur.Commission = Double.Parse(dataRow[6].ToString());
+                    vendeur.DateEmb = dataRow[4].ToString();
+                    vendeur.VilleVendeur = dataRow[5].ToString();
+                    vendeur.SalVendeur = Double.Parse(dataRow[6].ToString());
+                    vendeur.Commission = Double.Parse(dataRow[7].ToString());
 
                     ((List<Vendeur>)vendeurs).Add(vendeur);
                 }

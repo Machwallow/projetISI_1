@@ -7,18 +7,18 @@ namespace WebCommercial.Models.Metier
 {
     public class Commande
     {
-        private int nuComm;
-        private int nuVendeur;
-        private int nuClient;
+        private String nuComm;
+        private String nuVendeur;
+        private String nuClient;
         private String dateComm;
         private String fact;
         private int nbArticles = 0;
         private IEnumerable<Article> listArticles = null;
         private double totalCost;
 
-        public int NuComm { get => nuComm; set => nuComm = value; }
-        public int NuVendeur { get => nuVendeur; set => nuVendeur = value; }
-        public int NuClient { get => nuClient; set => nuClient = value; }
+        public String NuComm { get => nuComm; set => nuComm = value; }
+        public String NuVendeur { get => nuVendeur; set => nuVendeur = value; }
+        public String NuClient { get => nuClient; set => nuClient = value; }
         public string DateComm { get => dateComm; set => dateComm = value; }
         public String Fact { get => fact; set => fact = value; }
         public int NbArticles { get => nbArticles; set => nbArticles = value; }
@@ -36,7 +36,7 @@ namespace WebCommercial.Models.Metier
             set => totalCost = value;
         }
 
-        public Commande(int noComm, int noVendeur, int noClient, string dateComm, String fact)
+        public Commande(String noComm, String noVendeur, String noClient, string dateComm, String fact)
         {
             this.NuComm = noComm;
             this.NuVendeur = noVendeur;

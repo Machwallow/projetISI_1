@@ -7,24 +7,24 @@
 
 }
 
-<h2>Détails de la commande N°@Model.NuComm</h2>
+<h2>Détails de la commande N°@Html.DisplayFor(model => model.NuComm)</h2>
 
 @if (Model != null)
 {
 <div class="container">
     <div>
         <p>
-            <strong>Commande N°@Model.NuComm</strong>
+            <strong>Commande N°@Html.DisplayFor(model => model.NuComm)</strong>
         </p>
     </div>
     <div>
         <p>
-            <strong>Passée le :</strong> @Model.DateComm
+            <strong>Passée le :</strong> @Html.DisplayFor(model => model.DateComm)
         </p>
     </div>
     <div>
         <p>
-            <strong>Montant total :</strong> @Model.TotalCost €
+            <strong>Montant total :</strong> @Html.DisplayFor(model => model.TotalCost) €
         </p>
     </div>
     <table class="table table-striped">

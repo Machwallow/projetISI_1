@@ -29,7 +29,7 @@ namespace WebCommercial.Controllers
             return View(commandes);
         }
 
-        public ActionResult Details(int nuComm)
+        public ActionResult Details(String nuComm)
         {
             Commande comm = null;
             try
@@ -44,7 +44,7 @@ namespace WebCommercial.Controllers
             }
         }
 
-        public ActionResult Modifier(int nuComm)
+        public ActionResult Modifier(String nuComm)
         {
             Commande comm = null;
             ModifCommande modComm = null;
@@ -66,13 +66,24 @@ namespace WebCommercial.Controllers
         }
 
         [HttpPost]
-        public ActionResult Modifier(ModifCommande modComm)
+        public ActionResult Modifier()
         {
+            Commande comm = new Commande();
+            IEnumerable<Commande> commandes = null;
 
             try
             {
-                CommandeDao.updateComm(modComm.Comm);
-                return View("Index");
+                comm.NuComm = Request["NuComm"];
+                comm.NuVendeur = Request["NuVendeur"];
+                comm.NuClient = Request["NuClient"];
+                comm.DateComm = Request["DateComm"];
+                comm.Fact = Request["Fact"];
+                CommandeDao.updateComm(comm);
+
+                commandes = CommandeDao.getCommandes();
+
+                return View("Index", commandes);
+
             }
             catch (MonException e)
             {

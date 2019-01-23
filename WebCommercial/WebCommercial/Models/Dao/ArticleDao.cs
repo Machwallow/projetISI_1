@@ -13,7 +13,7 @@ namespace WebCommercial.Models.Dao
     public class ArticleDao
     {
 
-        public static IEnumerable<Article> getArticlesByNoComm(int nuComm)
+        public static IEnumerable<Article> getArticlesByNoComm(string nuComm)
         {
             IEnumerable<Article> articles = new List<Article>();
             DataTable dt;
@@ -24,14 +24,14 @@ namespace WebCommercial.Models.Dao
             {
                 String mysql = "SELECT * from articles inner join ";
                 mysql += "detail_cde on articles.NO_ARTICLE = detail_cde.NO_ARTICLE ";
-                mysql += "where detail_cde.NO_COMMAND =" + nuComm;
+                mysql += "where detail_cde.NO_COMMAND ='" + nuComm + "'";
 
                 dt = DBInterface.Lecture(mysql, er);
 
                 foreach (DataRow dataRow in dt.Rows)
                 {
                     artc = new Article();
-                    artc.NuArticle = Int16.Parse(dataRow[0].ToString());
+                    artc.NuArticle = dataRow[0].ToString();
                     artc.LibArticle = dataRow[1].ToString();
                     artc.QteDispo = Int16.Parse(dataRow[2].ToString());
                     artc.VilleArticle = dataRow[3].ToString();

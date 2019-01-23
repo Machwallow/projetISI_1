@@ -5,6 +5,7 @@
     ViewBag.Title = "Modifier";
     Layout = "~/Views/Shared/_LayoutCommercial.cshtml";
 }
+
 <h2>Modifier une commande</h2>
 @if (Model != null)
 {
@@ -26,9 +27,9 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-md-2">Société</label>
+        <label class="control-label col-md-2">N° Vendeur</label>
         <div class="col-md-10">
-            <select name="nuVendeur" id="NuVendeur" class="selectpicker">
+            <select name="NuVendeur" id="NuVendeur" class="selectpicker form-control">
                 @foreach (var vendeur in Model.ListVendeurs)
                 {
                     if (vendeur.NuVendeur == Model.Comm.NuVendeur)
@@ -47,10 +48,10 @@
     <div class="form-group">
         <label class="control-label col-md-2">N° Client</label>
         <div class="col-md-10">
-            <select name="nuClient" id="NuClient" class="selectpicker">
+            <select name="NuClient" id="NuClient" class="selectpicker form-control">
                 @foreach (var client in Model.ListClients)
                 {
-                    if (Int16.Parse(client.NuClient) == Model.Comm.NuClient)
+                    if (client.NuClient == Model.Comm.NuClient)
                     {
                         <option selected="selected">@client.NuClient</option>
                     }
@@ -64,25 +65,39 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-md-2">PrénomClient</label>
+        <label class="control-label col-md-2">Date de commande</label>
         <div class="col-md-10">
-            <input name="dateComm" type="text" class="form-control" value=@(@Model.Comm.DateComm) id="DateComm" />
+            <input name="DateComm" type="date" class="form-control" value=@(@Model.Comm.DateComm) id="DateComm" />
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-md-2">Adresse client</label>
+        <label class="control-label col-md-2">Facturée :</label>
         <div class="col-md-10">
-            <input name="fact" type="text" class="form-control" value=@(@Model.Comm.Fact) id="Fact" />
+            @if (Model.Comm.Fact == "F")
+            {
+                <span>True</span>
+                <input name="Fact" type="radio"  value="T" id="FactT">
+                <br />
+                <span>False</span>
+                <input name="Fact" type="radio" value="F" checked="checked" id="FactF" />
+            }
+            else
+            {
+                <span>True</span>
+                <input name="Fact" type="radio" value="T" checked="checked" id="FactT" />
+                <br />
+                <span>False</span>
+                <input name="Fact" type="radio" value="F" id="FactF" />
+            }
         </div>
+
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Enregistrer" class="btn btn-primary" />
-
         </div>
     </div>
 </div>
-
     }
 }
 

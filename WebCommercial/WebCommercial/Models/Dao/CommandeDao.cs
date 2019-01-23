@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using WebCommercial.Models.MesExceptions;
 using WebCommercial.Models.Metier;
@@ -19,7 +20,7 @@ namespace WebCommercial.Models.Dao
         public static IEnumerable<Commande> getCommandes()
         {
             IEnumerable<Commande> commandes = new List<Commande>();
-            int tempNoComm;
+            String tempNoComm;
             DataTable dt;
             Commande comm;
             Serreurs er = new Serreurs("Erreur sur lecture des commandes.", "CommandesList.getCommandes()");
@@ -32,10 +33,10 @@ namespace WebCommercial.Models.Dao
                 foreach (DataRow dataRow in dt.Rows)
                 {
                     comm = new Commande();
-                    comm.NuComm = Int16.Parse(dataRow[0].ToString());
+                    comm.NuComm = dataRow[0].ToString();
                     tempNoComm = comm.NuComm;
-                    comm.NuVendeur = Int16.Parse(dataRow[1].ToString());
-                    comm.NuClient = Int16.Parse(dataRow[2].ToString());
+                    comm.NuVendeur = dataRow[1].ToString();
+                    comm.NuClient = dataRow[2].ToString();
                     comm.DateComm = dataRow[3].ToString();
                     comm.Fact = dataRow[4].ToString();
 
@@ -43,7 +44,7 @@ namespace WebCommercial.Models.Dao
                     {
                         //Peut etre optimisé
                         String mysqlNbArticles = "SELECT count(*) ";
-                        mysqlNbArticles += "FROM commandes c, detail_cde d WHERE c.NO_COMMAND=" + tempNoComm;
+                        mysqlNbArticles += "FROM commandes c, detail_cde d WHERE c.NO_COMMAND='" + tempNoComm + "'";
                         mysqlNbArticles += " AND c.NO_COMMAND=d.NO_COMMAND GROUP BY c.NO_COMMAND";
 
                         DataTable tempDt;
@@ -87,7 +88,7 @@ namespace WebCommercial.Models.Dao
         /// </summary>
         /// <param name="nuComm"></param>
         /// <returns>Une commande</returns>
-        public static Commande getCommande(int nuComm)
+        public static Commande getCommande(String nuComm)
         {
 
             DataTable dt;
@@ -95,24 +96,28 @@ namespace WebCommercial.Models.Dao
             Serreurs er = new Serreurs("Erreur sur recherche d'une commande.", "Commande.RechercheUneCommande()");
             try
             {
-                String mysql = "SELECT * FROM commandes WHERE NO_COMMAND =" + nuComm;
+                String mysql = "SELECT * FROM commandes WHERE NO_COMMAND ='" + nuComm + "'";
 
                 dt = DBInterface.Lecture(mysql, er);
 
                 if(dt.IsInitialized && dt.Rows.Count > 0)
                 {
+                    String pattern= @"(\d{4})-(\d{2})-(\d{2})";
+                    
                     comm = new Commande();
                     DataRow dataRow = dt.Rows[0];
-                    comm.NuComm = Int16.Parse(dataRow[0].ToString());
-                    comm.NuVendeur = Int16.Parse(dataRow[1].ToString());
-                    comm.NuClient = Int16.Parse(dataRow[2].ToString());
-                    comm.DateComm = dataRow[3].ToString();
+                    comm.NuComm = dataRow[0].ToString();
+                    comm.NuVendeur = dataRow[1].ToString();
+                    comm.NuClient = dataRow[2].ToString();
+                    MatchCollection matches = Regex.Matches(dataRow[3].ToString(), pattern);
+                    String temp = dataRow[3].ToString().Replace('/', '-');
+                    comm.DateComm = temp;
                     comm.Fact = dataRow[4].ToString();
 
                     try
                     {
                         String mysqlNbArticles = "SELECT count(*) ";
-                        mysqlNbArticles += "FROM commandes c, detail_cde d WHERE c.NO_COMMAND=" + nuComm;
+                        mysqlNbArticles += "FROM commandes c, detail_cde d WHERE c.NO_COMMAND='" + nuComm + "'";
                         mysqlNbArticles += " AND c.NO_COMMAND=d.NO_COMMAND GROUP BY c.NO_COMMAND";
 
                         DataTable tempDt;
@@ -158,12 +163,11 @@ namespace WebCommercial.Models.Dao
         {
             Serreurs er = new Serreurs("Erreur sur l'écriture d'une commande.", "CommandeDao.updateComm()");
             String requete = "UPDATE commandes SET " +
-                                  "NO_COMMAND = '" + comm.NuComm + "'" +
-                                  ", NO_VENDEUR = '" + comm.NuVendeur + "'" +
-                                  ", NO_CLIENT = '" + comm.NuClient + "'" +
-                                  ", DATE_CDE = '" + comm.DateComm + "'" +
-                                   ", FACTURE = '" + comm.Fact + "'" +
-                                   " WHERE NO_CLIENT LIKE '" + comm.NuComm + "'";
+                                  "NO_VENDEUR ='" + comm.NuVendeur + "'" +
+                                  ", NO_CLIENT ='" + comm.NuClient + "'" +
+                                  ", DATE_CDE ='" + comm.DateComm + "' " +
+                                   ", FACTURE ='" + comm.Fact + "'" +
+                                   " WHERE NO_COMMAND ='" + comm.NuComm + "'";
             try
             {
                 DBInterface.Insertion_Donnees(requete);
