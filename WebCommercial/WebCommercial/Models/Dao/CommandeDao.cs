@@ -248,12 +248,30 @@ namespace WebCommercial.Models.Dao
 
         public static void DelComm(String nuComm)
         {
-            Serreurs er = new Serreurs("Erreur sur l'insertion d'une commande.", "CommandeDao.AddComm()");
-            String requete = "DELETE FROM commandes WHERE " + 
+            Serreurs er = new Serreurs("Erreur sur la suppression d'une commande.", "CommandeDao.DelComm()");
+            String requete = "DELETE FROM detail_cde WHERE " +
                                 "NO_COMMAND ='" + nuComm + "'";
+
             try
             {
                 DBInterface.Insertion_Donnees(requete);
+
+                String requete2 = "DELETE FROM commandes WHERE " +
+                                "NO_COMMAND ='" + nuComm + "'";
+
+                try
+                {
+                    DBInterface.Insertion_Donnees(requete2);
+                }
+                catch (MonException erreur)
+                {
+                    throw erreur;
+                }
+                catch (MySqlException e)
+                {
+                    throw new MonException(er.MessageUtilisateur(), er.MessageApplication(), e.Message);
+                }
+
             }
             catch (MonException erreur)
             {

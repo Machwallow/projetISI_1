@@ -14,160 +14,207 @@ namespace WebCommercial.Controllers
         // GET: Commande
         public ActionResult Index()
         {
-            IEnumerable<Commande> commandes = null;
-
-            try
+            if(Session["id"] != null)
             {
-                commandes = CommandeDao.GetCommandes();
-            }
-            catch(MonException e)
-            {
-                ModelState.AddModelError("Erreur", "Erreur lors de la récupération des commandes : " + e.Message);
-                return View("Error");
-            }
+                IEnumerable<Commande> commandes = null;
 
-            return View(commandes);
+                try
+                {
+                    commandes = CommandeDao.GetCommandes();
+                }
+                catch (MonException e)
+                {
+                    ModelState.AddModelError("Erreur", "Erreur lors de la récupération des commandes : " + e.Message);
+                    return View("Error");
+                }
+
+                return View(commandes);
+            }
+            else
+                return View("~/Views/Home/Connexion.cshtml");
         }
 
         public ActionResult Details(String nuComm)
         {
-            Commande comm = null;
-            try
+            if(Session["id"] != null)
             {
-                comm = CommandeDao.GetCommande(nuComm);
-                comm.ListArticles = ArticleDao.GetArticlesByNoComm(nuComm);
-                return View(comm);
+                Commande comm = null;
+                try
+                {
+                    comm = CommandeDao.GetCommande(nuComm);
+                    comm.ListArticles = ArticleDao.GetArticlesByNoComm(nuComm);
+                    return View(comm);
+                }
+                catch (MonException e)
+                {
+                    return HttpNotFound();
+                }
             }
-            catch (MonException e)
-            {
-                return HttpNotFound();
-            }
+            else
+                return View("~/Views/Home/Connexion.cshtml");
+
         }
 
         public ActionResult Modifier(String nuComm)
         {
-            Commande comm = null;
-            ModifCommande modComm = null;
-            IEnumerable<String> listClients= null;
-            IEnumerable<String> listVendeurs = null;
+            if(Session["id"] != null)
+            {
+                Commande comm = null;
+                ModifCommande modComm = null;
+                IEnumerable<String> listClients = null;
+                IEnumerable<String> listVendeurs = null;
 
-            try
-            {
-                comm = CommandeDao.GetCommande(nuComm);
-                listClients = ClientDao.GetNuClients();
-                listVendeurs = VendeurDao.GetNuVendeurs();
-                modComm = new ModifCommande(comm, listClients, listVendeurs);
-                return View(modComm);
+                try
+                {
+                    comm = CommandeDao.GetCommande(nuComm);
+                    listClients = ClientDao.GetNuClients();
+                    listVendeurs = VendeurDao.GetNuVendeurs();
+                    modComm = new ModifCommande(comm, listClients, listVendeurs);
+                    return View(modComm);
+                }
+                catch (MonException e)
+                {
+                    return HttpNotFound();
+                }
             }
-            catch (MonException e)
-            {
-                return HttpNotFound();
-            }
+            else
+                return View("~/Views/Home/Connexion.cshtml");
+
         }
 
         [HttpPost]
         public ActionResult Modifier()
         {
-            Commande comm = new Commande();
-            IEnumerable<Commande> commandes = null;
-
-            try
+            if(Session["id"] != null)
             {
-                comm.NuComm = Request["NuComm"];
-                comm.NuVendeur = Request["NuVendeur"];
-                comm.NuClient = Request["NuClient"];
-                comm.DateComm = Request["DateComm"];
-                comm.Fact = Request["Fact"];
-                CommandeDao.UpdateComm(comm);
+                Commande comm = new Commande();
+                IEnumerable<Commande> commandes = null;
 
-                commandes = CommandeDao.GetCommandes();
+                try
+                {
+                    comm.NuComm = Request["NuComm"];
+                    comm.NuVendeur = Request["NuVendeur"];
+                    comm.NuClient = Request["NuClient"];
+                    comm.DateComm = Request["DateComm"];
+                    comm.Fact = Request["Fact"];
+                    CommandeDao.UpdateComm(comm);
 
-                return View("Index", commandes);
+                    commandes = CommandeDao.GetCommandes();
 
+                    return View("Index", commandes);
+
+                }
+                catch (MonException e)
+                {
+                    return HttpNotFound();
+                }
             }
-            catch (MonException e)
-            {
-                return HttpNotFound();
-            }
+            else
+                return View("~/Views/Home/Connexion.cshtml");
+
         }
 
         public ActionResult Ajout()
         {
-            ModifCommande modComm = null;
-            IEnumerable<String> listClients = null;
-            IEnumerable<String> listVendeurs = null;
-            String max = "";
+            if(Session["id"] != null)
+            {
+                ModifCommande modComm = null;
+                IEnumerable<String> listClients = null;
+                IEnumerable<String> listVendeurs = null;
+                String max = "";
 
-            try
-            {
-                listClients = ClientDao.GetNuClients();
-                listVendeurs = VendeurDao.GetNuVendeurs();
-                max = CommandeDao.GetMaxNuComm();
-                modComm = new ModifCommande(max,listClients, listVendeurs);
-                return View(modComm);
+                try
+                {
+                    listClients = ClientDao.GetNuClients();
+                    listVendeurs = VendeurDao.GetNuVendeurs();
+                    max = CommandeDao.GetMaxNuComm();
+                    modComm = new ModifCommande(max, listClients, listVendeurs);
+                    return View(modComm);
+                }
+                catch (MonException e)
+                {
+                    return HttpNotFound();
+                }
             }
-            catch (MonException e)
-            {
-                return HttpNotFound();
-            }
+            else
+                return View("~/Views/Home/Connexion.cshtml");
+
         }
 
         [HttpPost]
         public ActionResult AjoutConf()
         {
-            Commande comm = new Commande();
-            IEnumerable<Commande> commandes = null;
-
-            try
+            if(Session["id"] != null)
             {
-                comm.NuComm = Request["NuComm"];
-                comm.NuVendeur = Request["NuVendeur"];
-                comm.NuClient = Request["NuClient"];
-                comm.DateComm = Request["DateComm"];
-                comm.Fact = Request["Fact"];
-                CommandeDao.AddComm(comm);
+                Commande comm = new Commande();
+                IEnumerable<Commande> commandes = null;
 
-                commandes = CommandeDao.GetCommandes();
+                try
+                {
+                    comm.NuComm = Request["NuComm"];
+                    comm.NuVendeur = Request["NuVendeur"];
+                    comm.NuClient = Request["NuClient"];
+                    comm.DateComm = Request["DateComm"];
+                    comm.Fact = Request["Fact"];
+                    CommandeDao.AddComm(comm);
 
-                return View("Index", commandes);
+                    commandes = CommandeDao.GetCommandes();
 
+                    return View("Index", commandes);
+
+                }
+                catch (MonException e)
+                {
+                    return HttpNotFound();
+                }
             }
-            catch (MonException e)
-            {
-                return HttpNotFound();
-            }
+            else
+                return View("~/Views/Home/Connexion.cshtml");
+
         }
 
         public ActionResult ShowSupprimer(String nuComm)
         {
-            try
+            if (Session["id"] != null)
             {
-                Commande temp = CommandeDao.GetCommande(nuComm);
-                temp.ListArticles = ArticleDao.GetArticlesByNoComm(nuComm);
-                return View("Supprimer",temp);
+                try
+                {
+                    Commande temp = CommandeDao.GetCommande(nuComm);
+                    temp.ListArticles = ArticleDao.GetArticlesByNoComm(nuComm);
+                    return View("Supprimer", temp);
+                }
+                catch (MonException e)
+                {
+                    return HttpNotFound();
+                }
             }
-            catch (MonException e)
-            {
-                return HttpNotFound();
-            }
+            else
+                return View("~/Views/Home/Connexion.cshtml");
+
         }
 
         [HttpPost]
         public ActionResult Supprimer()
         {
-            try
+            if(Session["id"] != null)
             {
-                String str = Request["NuComm"];
-                CommandeDao.DelComm(str);
+                try
+                {
+                    String str = Request["NuComm"];
+                    CommandeDao.DelComm(str);
 
-                IEnumerable<Commande> commandes = CommandeDao.GetCommandes();
+                    IEnumerable<Commande> commandes = CommandeDao.GetCommandes();
 
-                return View("Index", commandes);
+                    return View("Index", commandes);
+                }
+                catch (MonException e)
+                {
+                    return HttpNotFound();
+                }
             }
-            catch (MonException e)
-            {
-                return HttpNotFound();
-            }
+            else
+                return View("~/Views/Home/Connexion.cshtml");
+
         }
 
     }

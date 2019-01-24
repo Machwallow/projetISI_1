@@ -146,6 +146,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\CommandeController.cs" />
     <Compile Include="Controllers\ConnexionController.cs" />
@@ -218,6 +219,8 @@
     <Content Include="Views\Commande\Modifier.cshtml" />
     <Content Include="Views\Commande\Ajout.cshtml" />
     <Content Include="Views\Commande\Supprimer.cshtml" />
+    <Content Include="Views\Article\Modifier.cshtml" />
+    <Content Include="Views\Article\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

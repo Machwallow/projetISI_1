@@ -1,0 +1,41 @@
+﻿
+
+@model IEnumerable<WebCommercial.Models.Metier.Article>
+@{
+    ViewBag.Title = "Liste des articles";
+    Layout = "~/Views/Shared/_LayoutCommercial.cshtml";
+}
+
+@if (Model != null)
+{
+    <div class="container">
+        <div class="col-md-8 col-sm-8">
+            <div class="blanc">
+                <h1>Liste des commandes</h1>
+            </div>
+            <table class="table table-bordered table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>N° article</th>
+                        <th>Libellé article</th>
+                        <th>Qté Dispo</th>
+                        <th>Ville article</th>
+                        <th>Prix article (€)</th>
+                        <th>Interrompu </th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.NuArticle)</td>
+                        <td>@Html.DisplayFor(modelItem => item.LibArticle)</td>
+                        <td>@Html.DisplayFor(modelItem => item.QteDispo) </td>
+                        <td>@Html.DisplayFor(modelItem => item.VilleArticle)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PrixArticle) </td>
+                        <td>@Html.DisplayFor(modelItem => item.Interr)</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+}

@@ -14,51 +14,69 @@ namespace WebCommercial.Controllers
         // GET: Client
         public ActionResult Index()
         {
-            IEnumerable<Clientel> clients = null;
+            if (Session["id"] != null)
+            {
+                IEnumerable<Clientel> clients = null;
 
-            try
-            {
-                clients = ClientDao.GetClients();
-                return View(clients);
+                try
+                {
+                    clients = ClientDao.GetClients();
+                    return View(clients);
+                }
+                catch (MonException e)
+                {
+                    ModelState.AddModelError("Erreur", "Erreur lors de la récupération des clients : " + e.Message);
+                    return View("Error");
+                }
             }
-            catch (MonException e)
-            {
-                ModelState.AddModelError("Erreur", "Erreur lors de la récupération des clients : " + e.Message);
-                return View("Error");
-            }
+            else
+                return View("~/Views/Home/Connexion.cshtml");
 
         }
 
         // GET: Commande/Edit/5
         public ActionResult Modifier(string id)
         {
-            try
+            if(Session["id"] != null)
             {
-                Clientel unCl = ClientDao.GetClient(id);
-                return View(unCl);
-            }
-            catch (MonException e)
-            {
-                return HttpNotFound();
+                try
+                {
+                    Clientel unCl = ClientDao.GetClient(id);
+                    return View(unCl);
+                }
+                catch (MonException e)
+                {
+                    return HttpNotFound();
 
+                }
             }
+            else
+                return View("~/Views/Home/Connexion.cshtml");
+
         }
 
         [HttpPost]
         public ActionResult Modifier(Clientel unC)
         {
-            try
+            if(Session["id"] != null)
             {
-                // utilisation possible de Request
-               //  String s= Request["Societe"];
+                try
+                {
+                    // utilisation possible de Request
+                    //  String s= Request["Societe"];
 
-                ClientDao.UpdateClient(unC);
-                return View();
+                    ClientDao.UpdateClient(unC);
+                    return View();
+                }
+                catch (MonException e)
+                {
+                    return HttpNotFound();
+                }
             }
-            catch (MonException e)
-            {
-                return HttpNotFound();
-            }
+            else
+                return View("~/Views/Home/Connexion.cshtml");
+
+
         }
     }
 }

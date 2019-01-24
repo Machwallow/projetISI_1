@@ -87,5 +87,44 @@ namespace WebCommercial.Models.Persistance
                     throw new MonException(uneException.Message, "Insertion", "SQL");
                 }
             }
+
+        public static void CallProcedure(String procedure, String nuArt, Double mult)
+        {
+            MySqlConnection cnx = null;
+            try
+            {
+                // On ouvre une transaction 
+                cnx = Connexion.getInstance().getConnexion();
+                
+                MySqlCommand cmd = new MySqlCommand(procedure,cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("var_no",nuArt));
+                cmd.Parameters.Add(new MySqlParameter("var_mult", mult));
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException uneException)
+            {
+                throw new MonException(uneException.Message, "Update", "SQL");
+            }
         }
+
+        public static void CallProcedure(String procedure, Double mult)
+        {
+            MySqlConnection cnx = null;
+            try
+            {
+                // On ouvre une transaction 
+                cnx = Connexion.getInstance().getConnexion();
+
+                MySqlCommand cmd = new MySqlCommand(procedure, cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("var_mult", mult));
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException uneException)
+            {
+                throw new MonException(uneException.Message, "Update", "SQL");
+            }
+        }
+    }
     }
